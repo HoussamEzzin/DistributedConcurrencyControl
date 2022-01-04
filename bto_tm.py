@@ -1,3 +1,8 @@
+from operation import Operation
+
+op = Operation('')
+
+transaction_op_type = ''
 
 def bto_tm(msg):
 	while(msg):
@@ -13,7 +18,7 @@ def bto_tm(msg):
 				S = S + Si
 			elif op.Type == 'A' or op.Type == 'C':
 				dp(op)#S
-		elif msg.type = 'SC response':
+		elif msg.type == 'SC response':
 			op.Type = A 
 			bto_sc(op,_)#S
 			#restart transaction with a new timestamp
