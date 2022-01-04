@@ -1,10 +1,13 @@
-
-
+from operation import Operation
+op =  Operation('R')
+lock_request_granted = True
+commit_msg_recieved = False
+to = ''
 def c2pl_tm(msg):
 	while(msg):
 		if msg == 'transaction operation':
 			#let op be the operation
-			if op.type == BT:
+			if op.type == 'BT':
 				dp(op)
 			else:
 				c2pl_lm(op)
@@ -29,7 +32,11 @@ def c2pl_tm(msg):
 					print('Completion of the abort')
 					c2pl_lm(op)
 
-
+lu_unlocked = True
+lock_mode = ''
+lu_held_by_transaction = []
+operations = ''
+operation_waiting_for_queue = []
 def c2pl_lm(op):
 	if op.Type == 'R' or op.Type == 'W':
 		#fin the lock nit  lu such that op.arg belongs to lu
@@ -46,6 +53,18 @@ def c2pl_lm(op):
 				#set a lock on lu on behalf of O
 				print("Lock granted")
 		print("Locks released")
+
+def READ(x):
+    return x
+
+def WRITE(x):
+    print(x, ' written')
+    
+def COMMIT(x):
+    print('op committed')
+
+def ABORT(x):
+    print('op aborted')
 
 def dp(op):
 	if op.Type == 'BT':
